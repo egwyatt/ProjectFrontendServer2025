@@ -1,48 +1,84 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 
 const CategoriesPage = () => {
-  const [categories, setCategories] = useState([]);
-  const navigate = useNavigate();
+  const [activeCategory, setActiveCategory] = useState(null);
 
-  useEffect(() => {
-    fetch("http://localhost:5000/users/categories")
-      .then(res => res.json())
-      .then(data => setCategories(data.categories))
-      .catch(err => console.log("Error fetching categories:", err));
-  }, []);
-
-  const handleLogout = () => {
-    navigate("/logout");
+  const handleCategoryClick = (category) => {
+    setActiveCategory(activeCategory === category ? null : category);
   };
 
   return (
-    <div style={{ display: "flex" }}>
-      <div style={{ width: "20%", borderRight: "1px solid #ccc", padding: "10px" }}>
-        <h3>Categories</h3>
-        <ul>
-          {categories.map((category, index) => (
-            <li key={index}>
-              <a href={`#category-${category.id}`}>{category.name}</a>
-            </li>
-          ))}
-        </ul>
-      </div>
+    <div>
+      <h1>Choose a Category</h1>
 
-      <div style={{ marginLeft: "20px", flex: 1 }}>
-        <h2>Questions</h2>
-        {categories.map((category) => (
-          <div key={category.id} id={`category-${category.id}`} style={{ marginBottom: "20px" }}>
-            <h3>{category.name}</h3>
-            <p>1. {category.question1}</p>
-            <p>2. {category.question2}</p>
-          </div>
-        ))}
-
-        <button onClick={handleLogout}>Logout</button>
+      <div
+        className="category"
+        onClick={() => handleCategoryClick("category1")}
+      >
+        Category 1: History
       </div>
+      {activeCategory === "category1" && (
+        <div className="questions">
+          <div className="question">Who was President of the U.S. during the Civil War?</div>
+          <div className="question">Who was the first Black Supreme Court justice?</div>
+        </div>
+      )}
+
+
+      <div
+        className="category"
+        onClick={() => handleCategoryClick("category2")}
+      >
+        Category 2: Science
+      </div>
+      {activeCategory === "category2" && (
+        <div className="questions">
+          <div className="question">What is the hottest planet in our solar system?</div>
+          <div className="question">What is the main gas that humans exhale?</div>
+        </div>
+      )}
+
+      <div
+        className="category"
+        onClick={() => handleCategoryClick("category3")}
+      >
+        Category 3: Sports
+      </div>
+      {activeCategory === "category3" && (
+        <div className="questions">
+          <div className="question">How many bases are on a Baseball field?</div>
+          <div className="question">What do you call when a bowle knocks over all the pins?</div>
+        </div>
+      )}
+
+      <div
+        className="category"
+        onClick={() => handleCategoryClick("category4")}
+      >
+        Category 4: Entertainment
+      </div>
+      {activeCategory === "category4" && (
+        <div className="questions">
+          <div className="question">What movie won best picture at the 2018 Oscar's?</div>
+          <div className="question">Who starred in the movie, The Godfather?</div>
+        </div>
+      )}
+
+      <div
+        className="category"
+        onClick={() => handleCategoryClick("category5")}
+      >
+        Category 5: Literature
+      </div>
+      {activeCategory === "category5" && (
+        <div className="questions">
+          <div className="question">Who wrote, Wuthering Heights?</div>
+          <div className="question">Who wrote, The Great Gatsby?</div>
+        </div>
+      )}
     </div>
   );
 };
 
 export default CategoriesPage;
+
