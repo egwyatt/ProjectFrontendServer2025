@@ -117,7 +117,7 @@ export default function App() {
           <Route path="register" element={<Register  />} />
 
           <Route path="logout" element={<Logout uname={uname} handleLogout={handleLogout} />} />
-
+            <Route path="categories" element={<CategoriesPage />} />
           <Route path="*" element={<NoPage />} />
 
         </Route>
