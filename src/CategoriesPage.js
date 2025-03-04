@@ -1,3 +1,72 @@
+import { useParams } from "react-router-dom";
+
+const CategoriesPage = () => {
+  const { categoryId } = useParams();
+
+  const categories = [
+    {
+      id: "category1",
+      name: "History",
+      questions: [
+        "Who was President of the U.S. during the Civil War?",
+        "Who was the first Black Supreme Court justice?",
+      ],
+    },
+    {
+      id: "category2",
+      name: "Science",
+      questions: [
+        "What is the hottest planet in our solar system?",
+        "What is the main gas that humans exhale?",
+      ],
+    },
+    {
+      id: "category3",
+      name: "Sports",
+      questions: [
+        "How many bases are on a Baseball field?",
+        "What do you call when a bowler knocks over all the pins?",
+      ],
+    },
+    {
+      id: "category4",
+      name: "Entertainment",
+      questions: [
+        "What movie won Best Picture at the 2018 Oscars?",
+        "Who starred in the movie, The Godfather?",
+      ],
+    },
+    {
+      id: "category5",
+      name: "Literature",
+      questions: [
+        "Who wrote Wuthering Heights?",
+        "Who wrote The Great Gatsby?",
+      ],
+    },
+  ];
+
+  const category = categories.find((cat) => cat.id === categoryId);
+
+  if (!category) {
+    return <div>Category not found.</div>;
+  }
+
+  return (
+    <div>
+      <h1>{category.name}</h1>
+      <div className="questions">
+        {category.questions.map((question, index) => (
+          <div key={index} className="question">{question}</div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default CategoriesPage;
+
+/*
 import React, { useState } from "react";
 
 const CategoriesPage = () => {
@@ -81,4 +150,5 @@ const CategoriesPage = () => {
 };
 
 export default CategoriesPage;
+*/
 
